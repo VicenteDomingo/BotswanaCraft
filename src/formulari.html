@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="BotswanaCraft — Formulari de contacte i galeria d'artesania"
+    />
+    <link rel="stylesheet" href="./assets/styles/main.scss" />
+    <title>Contacte, Galeria i Formulari — BotswanaCraft</title>
+  </head>
+  <body>
+
+    <include src="./views/header.html"></include>
+
+    <main class="formulari">
+      <div class="formulari__container container py-5">
+      <!-- Fem ús de BEM + Bootstrap -->
+      
+      <!-- Secció Titol -->
+      <section class="formulari__hero">
+        <div class="row">
+          <div class="col-12 text-center">
+          <!-- col-12 -> ocupa les 12 columnes (100%) -->
+            <h1 class="formulari__titol display-4 fw-bold" data-aos="fade-down">
+              Contacte i Galeria
+            </h1>
+            <p class="formulari__subtitol lead text-secondary mt-3" data-aos="fade-up">
+              Descobreix l'artesania de Botswana i posa't en contacte amb nosaltres
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Galeria d'imatges -->
+      <section id="galeria" class="formulari__galeria container py-4">
+        <h2 class="formulari__section-titol mb-4 text-center"  data-aos="fade-right">
+          Galeria d'Artesania
+        </h2>
+        <div class="formulari__grid-galeria" data-aos="fade-up">
+          <div class="formulari__imatge-container">
+            <img
+              src="./assets/images/grid/image-grid-01-400.webp"
+              alt="Artisan Botswana 1"
+              class="formulari__imatge img-fluid rounded"
+              loading="lazy"
+            />
+            <div class="formulari__overlay">
+              <span class="formulari__overlay-text">Patrons del Kalahari</span>
+            </div>
+          </div>
+          <div class="formulari__imatge-container">
+            <img
+              src="./assets/images/grid/image-grid-02-400.webp"
+              alt="Artisan Botswana 2"
+              class="formulari__imatge img-fluid rounded"
+              loading="lazy"
+            />
+            <div class="formulari__overlay">
+              <span class="formulari__overlay-text">Ceràmica</span>
+            </div>
+          </div>
+          <div class="formulari__imatge-container">
+            <img
+              src="./assets/images/grid/image-grid-03-400.webp"
+              alt="Artisan Botswana 3"
+              class="formulari__imatge img-fluid rounded"
+              loading="lazy"
+            />
+            <div class="formulari__overlay">
+              <span class="formulari__overlay-text">Joyeria</span>
+            </div>
+          </div>
+          <div class="formulari__imatge-container">
+            <img
+              src="./assets/images/grid/image-grid-04-400.webp"
+              alt="Artisan Botswana 4"
+              class="formulari__imatge img-fluid rounded"
+              loading="lazy"
+            />
+            <div class="formulari__overlay">
+              <span class="formulari__overlay-text">Cistelleria</span>
+            </div>
+          </div>
+          <div class="formulari__imatge-container">
+            <img
+              src="./assets/images/grid/image-grid-05-400.webp"
+              alt="Artisan Botswana 5"
+              class="formulari__imatge img-fluid rounded"
+              loading="lazy"
+            />
+            <div class="formulari__overlay">
+              <span class="formulari__overlay-text">Pintura</span>
+            </div>
+          </div>
+          <div class="formulari__imatge-container">
+            <img
+              src="./assets/images/grid/image-grid-06-400.webp"
+              alt="Artisan Botswana 6"
+              class="formulari__imatge img-fluid rounded"
+              loading="lazy"
+            />
+            <div class="formulari__overlay">
+              <span class="formulari__overlay-text">Escultura</span>
+            </div>
+          </div>
+          <div class="formulari__imatge-container">
+            <img
+              src="./assets/images/grid/image-grid-07-400.webp"
+              alt="Artisan Botswana 7"
+              class="formulari__imatge img-fluid rounded"
+              loading="lazy"
+            />
+            <div class="formulari__overlay">
+              <span class="formulari__overlay-text">Textil</span>
+            </div>
+          </div>
+          <div class="formulari__imatge-container">
+            <img
+              src="./assets/images/grid/image-grid-08-400.webp"
+              alt="Artisan Botswana 8"
+              class="formulari__imatge img-fluid rounded"
+              loading="lazy"
+            />
+            <div class="formulari__overlay">
+              <span class="formulari__overlay-text">Broderia</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulari de contacte -->
+      <section class="formulari__contacte container py-5">
+        <h2 class="formulari__section-titol mb-4 text-center">
+          Formulari de Contacte
+        </h2>
+
+        <!-- Dropdown Bootstrap.  https://getbootstrap.com/docs/4.0/components/dropdowns/-->
+        <div class="formulari__dropdown mb-4 text-center" data-aos="zoom-in">
+          <div class="dropdown">
+            <button
+              class="formulari__dropdown-btn btn btn-outline-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Selecciona el tema de la teva consulta
+            </button>
+            <ul class="formulari__dropdown-menu dropdown-menu">
+              <li><a class="formulari__dropdown-item dropdown-item" href="#">Informació sobre les Jornades</a></li>
+              <li><a class="formulari__dropdown-item dropdown-item" href="#">Participació com a artesà</a></li>
+              <li><a class="formulari__dropdown-item dropdown-item" href="#">Col·laboració empresarial</a></li>
+              <li><a class="formulari__dropdown-item dropdown-item" href="#">Premsa i mitjans</a></li>
+              <li><a class="formulari__dropdown-item dropdown-item" href="#">Altres consultes</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Formulari. 
+        https://getbootstrap.com/docs/4.0/components/forms/ 
+        https://docs.netlify.com/manage/forms/setup/
+        https://snipcart.com/blog/netlify-forms
+
+        Amb Netlify Forms podem rebre dades de formularis sense necessitat de tenir un backend (PHP, Noje.js, ...). Cal afegir data-netlify="true" al formulari durant el build. Així, quan l'usuari envia el formulari, les dades van directament a Netlify. Els guardem i poden ser enviats per correu electrònic.
+
+        Requeriments -> necessitem l'atribut name="contacte". Cada camp necessita un atribut name="". data-netlify="true" a l'element <form>. Hi ha limitacions (https://answers.netlify.com/t/whats-the-limit-of-forms/45202). 100 enviaments al mes. 
+        -->
+        <form
+          class="formulari__form row g-4 needs-validation"
+          name="contacte"
+          method="POST"
+          data-netlify="true"
+          data-aos="fade-up"
+          novalidate
+        >
+        <!-- g-4 -> gutters de 1.5rem; needs-validation -> activem la validació nadiva d'HTML; method="POST" -> mètode d'enviament de dades; name="contacte" -> per identificar el formulari per a Netlify; data-netlify="true" -> per habilitar el processament automàtic de formularis a Netlify; novalidate -> desactivem la validació automàtica del navegador per fer us de Bootstrap -->
+
+          <div class="formulario__campo col-12 col-md-6">
+            <label for="input-nom" class="formulario__label form-label">
+              Nom complet <span class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              class="formulario__input form-control"
+              id="input-nom"
+              placeholder="Introdueix el teu nom"
+              required
+            />
+            <div class="invalid-feedback">
+              Per favor, introdueix el teu nom.
+            </div>
+          </div>
+
+          <div class="formulario__campo col-12 col-md-6">
+            <label for="input-email" class="formulario__label form-label">
+              Correu electrònic <span class="text-danger">*</span>
+            </label>
+            <input
+              type="email"
+              class="formulario__input form-control"
+              id="input-email"
+              placeholder="Introdueix el teu correu"
+              required
+            />
+            <div class="invalid-feedback">
+              Si us plau, introdueix un correu vàlid.
+            </div>
+          </div>
+
+          <div class="formulario__campo col-12 col-md-4">
+            <label for="input-telefon" class="formulario__label form-label">
+              Telèfon
+            </label>
+            <input
+              type="tel"
+              class="formulario__input form-control"
+              id="input-telefon"
+              placeholder="Introdueix el teu telèfon"
+            />
+          </div>
+
+          <div class="formulario__campo col-12 col-md-4">
+            <label for="input-ciutat" class="formulario__label form-label">
+              Ciutat
+            </label>
+            <input
+              type="text"
+              class="formulario__input form-control"
+              id="input-ciutat"
+              placeholder="Introdueix la teva ciutat"
+            />
+          </div>
+
+          <div class="formulario__campo col-12 col-md-4">
+            <label for="input-pais" class="formulario__label form-label">
+              País
+            </label>
+            <select class="formulario__input form-select" id="input-pais">
+              <option selected>Selecciona el teu país</option>
+              <option value="es">Botswana</option>
+              <option value="and">Zàmbia</option>
+              <option value="fr">Zimbabwe</option>
+              <option value="al">Sudàfrica</option>
+              <option value="altres">Moçambic</option>
+            </select>
+          </div>
+
+          <div class="formulario__campo col-12">
+            <label for="input-assumpte" class="formulario__label form-label">
+              Assumpte <span class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              class="formulario__input form-control"
+              id="input-assumpte"
+              placeholder="Introdueix l'assumpte del missatge"
+              required
+            />
+            <div class="invalid-feedback">
+              Si us plau, introdueix un assumpte.
+            </div>
+          </div>
+
+          <div class="formulario__campo col-12">
+            <label for="input-missatge" class="formulario__label form-label">
+              Missatge <span class="text-danger">*</span>
+            </label>
+            <textarea
+              class="formulario__textarea form-control"
+              id="input-missatge"
+              rows="5"
+              placeholder="Escriu el teu missatge aquí..."
+              required
+            ></textarea>
+            <div class="invalid-feedback">
+              Per favor, escriu un missatge.
+            </div>
+          </div>
+
+          <div class="formulario__accio col-12 text-center mt-4">
+            <button type="submit" class="formulario__boto btn btn-primary text-white btn-lg px-5">
+              Enviar missatge
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Accordion Preguntes Freqüents
+      https://getbootstrap.com/docs/5.0/components/accordion/ 
+      https://www.youtube.com/watch?v=cVThXv6hYW0
+      -->
+      <section id="preguntes" class="formulari__preguntes container py-5">
+        <h2 class="formulari__section-titol h3 mb-4 text-center" data-aos="fade-right">
+          Preguntes Freqüents
+        </h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <div class="formulari__accordion accordion" id="accordionPreguntes" data-aos="fade-up">
+              <div class="formulari__item accordion-item">
+                <h3 class="formulari__item-header accordion-header">
+                  <button
+                    class="formulari__item-boto accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#pregunta1"
+                  >
+                    Quan es realitzaran les Jornades d'Artesania?
+                  </button>
+                </h3>
+                <div
+                  id="pregunta1"
+                  class="formulari__item-collaps accordion-collapse collapse"
+                  data-bs-parent="#accordionPreguntes"
+                >
+                  <div class="formulari__item-content accordion-body">
+                    Les Jornades d'Artesania de Botswana es celebraran durant el proper trimestre.
+                    Les dates exactes es publicaran properament al nostre web i a les xarxes socials.
+                  </div>
+                </div>
+              </div>
+
+              <div class="formulari__item accordion-item">
+                <h3 class="formulari__item-header accordion-header">
+                  <button
+                    class="formulari__item-boto accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#pregunta2"
+                  >
+                    Com puc participar com a artesà a les Jornades?
+                  </button>
+                </h3>
+                <div
+                  id="pregunta2"
+                  class="formulari__item-collaps accordion-collapse collapse"
+                  data-bs-parent="#accordionPreguntes"
+                >
+                  <div class="formulari__item-content accordion-body">
+                    Si vols participar com a artesà, omple el formulari de contacte seleccionant
+                    l'opció "Participació com a artesà". Rebràs informació sobre els requisits
+                    i el procés de selecció.
+                  </div>
+                </div>
+              </div>
+
+              <div class="formulari__item accordion-item">
+                <h3 class="formulari__item-header accordion-header">
+                  <button
+                    class="formulari__item-boto accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#pregunta3"
+                  >
+                    On es duran a terme els esdeveniments?
+                  </button>
+                </h3>
+                <div
+                  id="pregunta3"
+                  class="formulari__item-collaps accordion-collapse collapse"
+                  data-bs-parent="#accordionPreguntes"
+                >
+                  <div class="formulari__item-content accordion-body">
+                    Les Jornades tindran lloc a diferents espais culturals de Botswana, incloent
+                    el Museu Nacional de Gaborone i diversos espais a les ciutats de Maun i Kasane.
+                  </div>
+                </div>
+              </div>
+
+              <div class="formulari__item accordion-item">
+                <h3 class="formulari__item-header accordion-header">
+                  <button
+                    class="formulari__item-boto accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#pregunta4"
+                  >
+                    Hi ha cost d'entrada per assistir a les Jornades?
+                  </button>
+                </h3>
+                <div
+                  id="pregunta4"
+                  class="formulari__item-collaps accordion-collapse collapse"
+                  data-bs-parent="#accordionPreguntes"
+                >
+                  <div class="formulari__item-content accordion-body">
+                    L'entrada a les Jornades és gratuïta per a tots els visitants. Alguns
+                    tallers específics poden tenir un cost addicional que es comunicarà
+                    prèviament.
+                  </div>
+                </div>
+              </div>
+
+              <div class="formulari__item accordion-item">
+                <h3 class="formulari__item-header accordion-header">
+                  <button
+                    class="formulari__item-boto accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#pregunta5"
+                  >
+                    Com puc obtenir més informació sobre les activitats?
+                  </button>
+                </h3>
+                <div
+                  id="pregunta5"
+                  class="formulari__item-collaps accordion-collapse collapse"
+                  data-bs-parent="#accordionPreguntes"
+                >
+                  <div class="formulari__item-content accordion-body">
+                    Pots subscriure't al nostre newsletter per rebre novetats, seguir-nos
+                    a les xarxes socials, o posar-te en contacte amb nosaltres mitjançant
+                    el formulari d'aquesta pàgina.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+    </main>
+
+    <!-- Modal de agraïment -->
+    <div
+      class="formulari__modal modal fade"
+      id="modalAgraits"
+      tabindex="-1"
+      aria-labelledby="modalAgraitsLabel"
+      aria-hidden="true"
+    >
+      <div class="formulari__modal-dialog modal-dialog modal-dialog-centered">
+        <div class="formulari__modal-content modal-content">
+          <div class="formulari__modal-header modal-header border-0">
+            <h5 class="formulari__modal-titol modal-title" id="modalAgraitsLabel">
+              Gràcies pel teu missatge!
+            </h5>
+            <button
+              type="button"
+              class="formulari__modal-tancar btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Tancar"
+            ></button>
+          </div>
+          <div class="formulari__modal-body modal-body text-center py-4">
+            <i class="formulari__modal-icon fas fa-check-circle text-success fs-1 mb-3"></i>
+            <p class="mb-0">
+              Hem rebut el teu missatge correctament. Et responderem
+              tan aviat com sigui possible.
+            </p>
+          </div>
+          <div class="formulari__modal-footer modal-footer border-0 justify-content-center">
+            <button
+              type="button"
+              class="formulari__modal-boto btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Tancar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <include src="./views/footer.html"></include>
+    <script
+      src="../node_modules/aos/dist/aos.js"
+    ></script>
+    <script type="module" src="./assets/scripts/main.js"></script>
+  </body>
+</html>

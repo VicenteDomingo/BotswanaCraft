@@ -1,0 +1,214 @@
+@use "../variables" as v; // Importem les variables amb l'àlies v. 
+
+@layer components { // Cascading Layers. Definim a main.scss: @layer reset, bootstrap, components -> components + prioritat que la resta. No cal que userm !important. 
+
+  .article { // Bloc BEM. Representa el contenidor principal de tota la pàgina d'article. 
+    background-color: v.$color-bg;
+    min-height: 100vh; // La pàgina ocupa, almenys, el 100% de l'altura de la finestra. min-heigh -> en cas que el contingut siga més alt. 
+    width: 100%; // Tot l'ample disponible
+    display: flex; // Flexbox per a la organizació
+    flex-direction: column;
+    align-items: center; // Els fills ocupen tot l'ample
+  }
+
+  .article__header { // Element BEM
+    max-width: 800px; // Limitem l'amplada per a millor llegibilitat ja que línies de text massa llargues cansen (45-70 caràcters x línia).
+    width: 100%;
+    margin-inline: auto; // Centrat horitzontal
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+
+  .article__category {
+    display: block; // Ocupa tota la línia
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: v.$color-accent; // Color blau de Botswana
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .article__title {
+    margin: 1rem 0;
+    font-family: v.$font-display;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: v.$color-text;
+  }
+
+  .article__meta {
+    font-size: 0.9rem;
+    color: v.$color-text-light;
+  }
+
+  // Imatge gran — amplada completa, menys alta
+  .article__figure--full { // MODIFIER BEM. 
+    display: block; 
+    width: 100%;
+    margin: 0;
+    
+  }
+
+  .article__image--full {
+    display: block;
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+  }
+
+  // Contingut — alineat a l'esquerra
+  .article__content { // Contenidor del text de l'article
+    max-width: 800px; // Mateixa amplada que article__header, per alineació visual
+    width: 100%;
+    padding: 3rem 2rem;
+    text-align: left;
+  }
+
+  // Paràgrafs amb més separació
+  .article__content p { // Tots els <p> DIRECTES d'.article__content. Ho usem per a :where 
+    margin-bottom: 2.5rem;
+  }
+
+  // Títols h2 amb més separació
+  .article__content h2 { // <h2> dins d'article__content. Ho usem per a :is(.article__content h2, h3, h4), per aplicar estils. Aquests ténen prioritat (classe + element) front a :is() que té l'especificitat del selector més específic. (https://web.dev/articles/css-is-and-where)
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-family: v.$font-display;
+    font-size: 1.5rem;
+    color: v.$color-text;
+  }
+
+  // Blockquote
+  .article__quote { // ELEMENT BEM
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    font-style: italic;
+    background: rgba(117, 170, 219, 0.15); // La regla color-function-notation:"legacy" de Stylelint, suporta la notació amb comes. https://stylelint.io/user-guide/rules/color-function-notation/
+    border-left: 4px solid v.$color-accent;
+  }
+
+  .article__quote small {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    color: v.$color-text-light;
+  }
+
+  // Llista
+  .article__list {
+    margin: 2rem 0 2.5rem;
+    padding-left: 1.5rem;
+    line-height: 2;
+    text-align: left;
+  }
+
+  .article__list li { // Cada ítem de la llista. Ho fem així per aplicar estils amb :where()
+    margin-bottom: 0.5rem;
+  }
+
+  .article__list li strong {
+    color: v.$color-accent;
+  }
+
+  // Imatge interior
+  .article__figure {
+    display: block;
+    width: 100%;
+    margin: 2.5rem 0;
+  }
+
+  .article__image {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto; // L'altura s'ajusta automàticament a la proporció original. Proporció real
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 0.5rem;
+  }
+
+  .article__caption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: v.$color-text-light;
+  text-align: center;
+}
+
+// =====================================================
+// :has() - pseudo-classe I
+// =====================================================
+.article__figure:has(figcaption) { // El selector familiar (https://developer.chrome.com/blog/has-m105/). "The :has() CSS pseudo-class represents an element if any of the selectors passed as parameters match at least one element." Selecciona element pare basant-se en els seus fills. Si <figure> té peu de foto, aplica estils.
+  padding: 1rem;
+  background-color: rgba(117, 170, 219, 0.08);
+  border-radius: 0.5rem;
+}
+
+// =====================================================
+// :has() - pseudo-classe II 
+// =====================================================
+.article__content:has(.article__list) .article__list ~ p { // Si .article__content, té una llista (.article__list), cerca qualsevol <p> despres de la llista (tilda) i aplica estils.  
+  margin-top: 3rem;
+}
+
+
+// =====================================================
+// :is() — pseudo-classe 
+// =====================================================
+:is( 
+  .article__content h2,
+  .article__content h3,
+  .article__content h4
+) { // Agrupa selectors CSS per evitar la repetició del codi. Seguim el principi que menciona Harris a la seua guia: DRY (Don't Repeat Yourself), "keep the repetition of key information to a minimum" (https://cssguidelin.es/#dry). En cas que fèrem ús de h3, h4 en un futur, ja tindríem els estils. 
+  font-family: v.$font-display;
+  color: v.$color-text;
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+
+
+// ===================================================
+// :where() — pseudo-classe
+//====================================================
+:where(
+  .article__content p,
+  .article__content li,
+  .article__content blockquote
+) { // :where té especificitat 0 (https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:where), a diferència de :is(). Exemple -> :is(.article__content h2) → especificitat: (0,1,1) -> (1 classe + 1 element) / :where(.article__content h2) → especificitat: (0,0,0). Podem sobreescriure fàcilment els estils base. Apliquem estils base 
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: v.$color-text;
+}
+
+  // ===================================================
+  // Container query 
+  // ===================================================
+  .article {
+    container-type: inline-size; // Convertirm .article en contenido mesurable per amplada.
+    container-name: article; // Nom del contenidor
+  }
+
+  @container article (max-width: 600px) { // En pantalles menudes, 
+    .article__title {
+      font-size: 1.8rem; // Reduïm el títol
+    }
+
+    .article__image--full { // 
+      height: 200px; // Es modifica l'alçada de la imatge
+    }
+
+    .article__content {
+      padding: 2rem 1rem; // Menys padding en mòbil per aprofitar millor l'espai
+    }
+  }
+
+  @container article (min-width: 900px) { // En pantalles grans, 
+    .article__image--full {
+      height: 320px; // Imatge central augmentem l'alçada -> més presència visual
+    }
+
+    .article__content p {
+      font-size: 1.25rem; // Text lleugerament més gran en pantalles grans
+    }
+  }
+}

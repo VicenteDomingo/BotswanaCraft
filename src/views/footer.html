@@ -1,0 +1,101 @@
+<!-- Per a desenvolupar aquest footer, he hagut de llegir i estudiar la documentació oficial de Bootstrap, a banda de fer els exercicis de la matèria i seguir alguns tutorial a la xarxa. M'ha servit com a referència https://www.youtube.com/watch?v=4sosXZsdy-s&t=622s, amb Traversy Media. -->
+
+<!-- fons blanc, padding eix y 3rem, accessibilitat WAI-ARIA  -->
+<footer class="bg-white py-5 border-top" role="contentinfo">
+  <div class="container">
+    <!-- fila del sistema grid de Bootstrap. S'aplica display:flex. Marge inferior 1.5rem  -->
+    <div class="row align-items-center mb-4">
+      <!-- Logo  "Use our powerful mobile-first flexbox grid to build layouts of all shapes and sizes thanks to a twelve column system". Ocupa 12 columnes en mòvil, 4 a partir de 768px, text centrat i alineat a l'esquerra a partir de 768px -->
+      <div class="col-12 col-md-4 mb-5 mb-md-0 text-center text-md-start">
+        <img 
+          src="./assets/images/logos/logo.webp"
+          alt="BotswanaCraft"
+          class="mb-2 d-inline-block" 
+          style="height: 40px; width: auto;" 
+        />
+        <p class="mb-0 text-muted small">Jornades de Màgia Artesana</p>
+      </div>
+
+      <!-- Contactes. A partir de 768px, 3 seccions de 4 columnes. mb-md-0 -> sense marge inferior a partir de 768px ""  -->
+      <div class="col-12 col-md-4 mb-5 mb-md-0 text-center">
+        <p class="mb-2 small text-dark">
+          <!-- me-2 -> marge a l'esquerra de 0.5rem -->
+          <i class="fas fa-map-marker-alt me-2" aria-hidden="true"></i>
+          Gaborone, Botswana
+        </p>
+        <p class="mb-2 small text-dark">
+          <i class="fas fa-envelope me-2" aria-hidden="true"></i>
+          info@botswanacraft.bw
+        </p>
+        <p class="mb-0 small text-dark">
+          <i class="fas fa-phone me-2" aria-hidden="true"></i>
+          +267 123 456
+        </p>
+      </div>
+
+      <!-- Xarxes socials -->
+      <div class="col-12 col-md-4 mb-3 text-center text-md-end">
+        <p class="mb-2 small text-muted text-uppercase">Segueix-nos</p>
+        <!-- list-unstyled -> elimina els estils per defecte de la llista; d-flex -> aplica display:flex; gap-3 -> espai entre elements; justify-content-md-end -> alinea els elements a la dreta a partir de 768px -->
+        <ul class="list-unstyled d-flex justify-content-center justify-content-md-end gap-3 mb-0">
+          <li>
+            <a href="#" class="link-dark" aria-label="Facebook de BotswanaCraft">
+              <!-- fa-lg -> mida gran -->
+              <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="link-dark" aria-label="Instagram de BotswanaCraft">
+              <i class="fab fa-instagram fa-lg" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="link-dark" aria-label="YouTube de BotswanaCraft">
+              <i class="fab fa-youtube fa-lg" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="link-dark" aria-label="Pinterest de BotswanaCraft">
+              <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Línia per separar contacte amb politiques de privacitat -->
+    <hr class="border-secondary-subtle" />
+
+    <!-- Polítiques de privacitat -->
+    <div class="row align-items-center mt-3">
+      <div class="col-12 col-md-6 text-center text-md-start mb-2 mb-md-0">
+        <!-- flex-wrap -> permet que els elements salten a la següent línia si no hi ha espai suficient -->
+        <ul class="list-unstyled d-flex flex-wrap justify-content-center justify-content-md-start gap-3 mb-0">
+          <li>
+            <a href="#" class="text-muted small text-decoration-none">
+              Sobre nosaltres
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-muted small text-decoration-none">
+              Política de privacitat
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-muted small text-decoration-none">
+              Avís legal
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-6 text-center text-md-end">
+        <p class="mb-0 text-muted small">
+          <i class="fas fa-copyright me-1" aria-hidden="true"></i>
+          2026 Vicent Domingo Sanchis
+        </p>
+      </div>
+    </div>
+
+  </div>
+</footer>

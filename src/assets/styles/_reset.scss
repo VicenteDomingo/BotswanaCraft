@@ -1,0 +1,79 @@
+// Escollim el reset de Josh Cosmeau (https://www.joshwcomeau.com/css/custom-css-reset/). Segueix la lògica del workflow modern de desenvolupament front-end. El vaig descobrir a Eines 1. Hem resulta molt interessant. Està orientat al CSS actual. Com diu el mateix Cosmeau, "For a long time, I used Eric Meyer's famous CSS Reset". Aleshores, es una actualització d'aquest. 
+
+// 1. Model de Caixa
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// 2. Elminem marge per defecte. Excloent <dialog>, ja que aquest té un comportament especial (https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog) 
+// 2. Eliminem marge per defecte
+// Excloem els elements que necessiten margin: auto per centrar-se
+// *:not(dialog):not(.ponentes__grid):not(.container):not(.container-fluid) {
+//   margin: 0;
+// }
+
+// 3. Animacions accessibles. En el nostre cas, si es tracta d'un usuari amb reducció de moviment en pantalla, les animacions AOS no es mostrarien (https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion)
+// @media (prefers-reduced-motion: no-preference) {
+//   html {
+//     interpolate-size: allow-keywords;
+//   }
+// }
+
+// 4. Add accessible line-height. Per defecte, l'interlineat del navegador es 1.2. Ací donem més espai entre línies
+// 5. Improve text rendering
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-top: 70px;
+}
+
+// 6. Millora els media per defecte. Les imatges passen de inline a block. max-widt:100% -> disseny responsive, "This is done to keep large images from overflowing, if they're placed in a container that isn't wide enough to contain them."
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// 7. Hereta fonts de Formularis
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// 8. Avoid text overflows. Amb overflow-wrap:break-word -> paraules molt llarges isquen del conenidor (https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow-wrap)
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+// 9. Improve line wrapping
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+// 10. Create a root stacking context
+#root,
+#__next {
+  isolation: isolate;
+}

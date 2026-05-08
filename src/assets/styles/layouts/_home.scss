@@ -1,0 +1,9 @@
+@use "../variables" as v;
+
+body {
+  padding-top: 70px;
+  font-family: v.$font-body;
+  color: v.$color-text;
+  background-color: v.$color-bg;
+}
+

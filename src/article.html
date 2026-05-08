@@ -1,0 +1,119 @@
+<!doctype html>
+<!-- Declarem el minúscules el tipus de document HTML5, tot seguint Mark Otto: "Use soft tabs with two spaces", "In keeping with the suggested syntax, keep it lowercase" (https://codeguide.co/)  -->
+
+<html lang="ca">
+<!-- atribut d'idioma. Indica que el document és en català (accessibilitat, SEO). Mark Otto: "Authors are encouraged to specify a lang attribute on the root html element" -->
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="BotswanaCraft — Article sobre l'artesania tradicional de Botswana"
+    />
+    <link rel="stylesheet" href="./assets/styles/main.scss" />
+    <!-- Enllaça al full d'estils principal. Parcel detecta que es .scss i el compila. Setguint Otto: "Per HTML5 spec, typically there is no need to specify a type when including CSS and JavaScript files as text/css and text/javascript are their respective defaults." -->
+    <title>Article — BotswanaCraft</title>
+  </head>
+  <body>
+
+    <include src="./views/header.html"></include>
+    <!-- Funciona pel plugin posthtml-include a .posthtmlrc. Durand el build, Parce ho substitueix pel contingut real de header.html. Apliquem la guia de Harry Roberts, "the single responsibility principle states that every context (class, function, variable, etc.) should have a single responsibility, and that responsibility should be entirely encapsulated by the context." (https://cssguidelin.es/#the-single-responsibility-principle) -->
+
+    <!-- Article -->
+    <main class="article">
+
+      <!-- Header -->
+      <header class="article__header">
+        <span class="article__category">Cultura</span>
+        <h1 class="article__title">L'Artesania de Botswana: Tradició i Identitat</h1>
+        <p class="article__meta">
+          15 Abril 2026 | By Leruri Mbeki | 8 min. de lectura
+        </p>
+      </header>
+
+      <!-- Imatge principal -->
+      <figure class="article__figure article__figure--full">
+        <picture>
+          <!-- RESOLUTION SWITCHING 
+          El navegador tria automàticament la imatge més adequada -->
+          <source type="image/webp" media="(min-width: 768px)" srcset="./assets/images/articles/article-01-800.webp" />
+          <source type="image/webp" media="(max-width: 767px)" srcset="./assets/images/articles/article-01-400.webp" />
+          <img
+            src="./assets/images/articles/article-01-800.webp"
+            alt="Dones treballant en teixits tradicionals"
+            class="article__image article__image--full"
+            loading="lazy"
+          />
+        </picture>
+      </figure>
+
+      <!-- Contingut de l'Article -->
+      <div class="article__content">
+      <!-- Contenidor de layout sense semàntica específica -->
+        <p>
+          L'artesania de Botswana és un reflex viu de la seva diversitat cultural i la riquesa de les seves tribus. Aquestes peces tradicionals es poden trobar tant en botigues especialitzades de ciutats com Gaborone o Maun, com en els campaments de safari de tot el país, unint tradició i mercat actual. 
+        </p>
+
+        <p>
+          L'art indígena, especialment les decoracions lekgapho a les cases tradicionals, és un llegat impressionant que passa de generació en generació. Tot i que l'ús del formigó està substituint el fang, aquestes ornamentacions encara es poden admirar en zones rurals com un testimoni de la identitat visual del poble batswana.
+        </p>
+
+        <h2>La Importància dels Cistells</h2>
+
+        <p>
+          La cistelleria de Botswana és reconeguda internacionalment com una de les millors d'Àfrica per la seva qualitat i originalitat. Les dones utilitzen la palma mokolwane, que bullen amb tints naturals extrets d'arrels i escorces per obtenir una gamma de vermells, marrons i grocs d'una bellesa excepcional.
+        </p>
+
+        <blockquote class="article__quote">
+        <!-- Element semàntic HTML5 per a cites. Accessibilitat i SEO -->
+          "L'art a Botswana i al Sur d'Àfrica, va més enllà de la representació. És una expressió de vida, d'entendre el món."
+          <small>— Mr. Crawford Mandumbwa, professor d'art a WIS Gaborone </small>
+        </blockquote>
+
+        <p>
+          Tradicionalment, els cistells tenien usos pràctics com emmagatzemar llavors o transportar aliments. Avui dia, la seva elaboració és un procés lent i minuciós: un sol cistell gran pot trigar fins a dues setmanes a completar-se, esdevenint una font d'ingressos vital per a moltes famílies rurals.
+        </p>
+
+        <h2>Tècniques Ancestrals</h2>
+
+        <ul class="article__list">
+          <li><strong>Teixits i Cistelleria:</strong> Ús de la palma i fibres naturals amb dissenys poètics com "Les llàgrimes de la girafa".</li>
+          <li><strong>Ceràmica:</strong>Elaborada per dones de la comunitat amb argila i òxids naturals per a usos domèstics i rituals.</li>
+          <li><strong>Fusta i Os:</strong> Talla de fusta de mophane i joieria fina tallada en os, una alternativa sostenible al marfil.</li>
+          <li><strong>Artesania San (Bushman):</strong> Revitalització de joieria de closca d'ou d'estruç, arcs de caça i instruments musicals tradicionals.</li>
+        </ul>
+
+        <figure class="article__figure">
+          <picture>
+            <source type="image/webp" media="(min-width: 768px)"
+              srcset="./assets/images/articles/article-02-800.webp" />
+            <source type="image/webp" media="(max-width: 767px)"
+              srcset="./assets/images/articles/article-02-400.webp" />
+            <img
+              src="./assets/images/articles/article-02-800.webp"
+              alt="Exposició d'artesania al Museu Nacional"
+              class="article__image"
+              loading="lazy"
+            />
+            <!-- loading="lazy", la imatge es carrega en fer scroll. https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading -->
+          </picture>
+          <figcaption class="article__caption">
+            Exposició d'artesania tradicional al Museu Nacional de Botswana, 2024
+          </figcaption>
+        </figure>
+        <p>
+          L'artesania no es limita a la utilitat, sinó que s'estén a la navegació i l'art visual. El mokoro, la canoa tradicional excavada en un sol tronc (ara sovint de fibra de vidre per preservar el bosc), segueix sent el mitjà de transport essencial al Delta de l'Okavango i un símbol de l'adaptació al medi.
+        </p>
+        <p>
+          Finalment, el Museu Nacional de Gaborone i diverses cooperatives artístiques fomenten que tant ciutadans com residents mantinguin viu el patrimoni artístic. Botswana ha sabut transformar les seves habilitats ancestrals en un motor econòmic que manté la cultura viva i en constant evolució.
+        </p>
+      </div>
+
+    </main>
+
+    <include src="./views/footer.html"></include>
+
+    <script type="module" src="./assets/scripts/main.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,24 @@
+// 1. Estan a la mateixa carpeta que main.scss
+@use "dependencies"; 
+@use "variables" as v;
+
+// --- Ordre de les capes ---
+@layer reset, bootstrap, components;
+
+@layer reset {
+  @import "reset";
+}
+
+@layer bootstrap {
+  @import "bootstrap-config"; // ← usa el fitxer de configuració
+}
+
+@layer components {
+  @import "layouts/home";
+  @import "layouts/article";
+  @import "layouts/poster";
+  @import "layouts/ponentes";
+  @import "layouts/formulari";
+}
+
+

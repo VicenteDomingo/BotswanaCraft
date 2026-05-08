@@ -1,0 +1,115 @@
+<!-- Navbar -->
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <picture>
+        <source media="(min-width: 992px)" srcset="./assets/images/logos/logo-desktop.png">
+        <img src="./assets/images/logos/logo-cell.png" alt="BotswanaCraft" class="d-block" style="height: 50px;">
+      </picture>
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMenu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="ponentes.html">Ponents</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="article.html">Article</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Formulari
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="formulari.html">Contacte</a></li>
+            <li><a class="dropdown-item" href="formulari.html#galeria">Galeria</a></li>
+            <li><a class="dropdown-item" href="formulari.html#preguntes">Preguntes Freqüents</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
+
+<!-- Per al disseny i codi del header, he hagut de llegir amb atenció la documentació oficial de Bootstrap, sobretot amb relació al component navbar (https://getbootstrap.com/docs/5.3/components/navbar/) 
+
+navbar -> activa el component de navegació; navbar-expand-lg -> fa que el menú es col·lapsi en pantalles menudes (menys de 992px); navbar-light -> fa que el text del menú sigui fosc; bg-white -> fons blanc; fixed-top -> fixa el menú a la part superior de la pàgina; shadow-sm -> afegeix una sombra petita al menú per donar-li profunditat.
+-->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+  
+  <!-- container -> "Containers are the most basic layout element in Bootstrap and are required when using our default grid system". En aquest cas, "sets a max-width at each responsive breakpoint";   -->
+  <div class="container">
+    <!-- navbar-brand -> classe per al logo del navbar -->
+    <a class="navbar-brand" href="index.html">
+
+      <img
+        src="./assets/images/logos/logo.webp"
+        alt="Logo de BotswanaCraft"
+        style="height: 40px; width: auto;"
+      />
+    </a>
+    <!-- navbar-toggler -> classe per al botó de col·lapse del menú; data-bs-toggle="collapse" -> el botó controla un element col·lapse; #navMenu -> ID del element col·lapse + accessibilitat  -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMenu"
+      aria-controls="navMenu"
+      aria-expanded="false"
+      aria-label="Obrir menú"
+    >
+      <!-- les tres línies de l'hamburguesa, generades amb CSS Bootstrap -->
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Element col·lapse del menú. Gestionem amb navbar-collapse, el comportament del col·lapse. navMenu -> connecta amb el botó. -->
+    <div class="collapse navbar-collapse" id="navMenu">
+      <!-- navbar-nav -> classe per a la llista de navegació; ms-auto -> alinea a la dreta; gap-2 -> espai entre elements -->
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item">
+          <a class="nav-link" href="ponentes.html">Ponents</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="article.html">Article</a>
+        </li>
+        <!-- dropdown menu. Aquest <li> conté el menú desplegable -->
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Formulari
+          </a>
+          <!-- dropdown menu. Aquest <ul> conté les opcions del menú desplegable -->
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" href="formulari.html">Contacte</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="formulari.html#galeria">
+                Galeria
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="formulari.html#preguntes">
+                Preguntes Freqüents
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>

@@ -1,0 +1,174 @@
+@use "../variables" as v; // Importem les variables per a colors, fonts i espaiat
+
+@layer components { // Fem ús de Cascadin layer. L'ordre està definit per l'ordre d'importació a main.scss. 
+  
+  // Ens inspirem en el disseny de Jen Simmons https://labs.jensimmons.com/2017/03-008.html, descrit al següent tutorial: https://www.youtube.com/watch?v=-hmOZU7Zk10&list=PLbSquHt1VCf2irEuVf8c2hsoOMKyeQ2LO&index=1&t=329s
+
+  .poster { 
+    container-type: inline-size; // Convertim el poster en un container per a poder fer container queries. Amb inline-size controlem l'amplada del container, que és el que ens interessa per a adaptar el layout a diferents amplades de pantalla.
+    container-name: poster; // El nom del container.
+    position: relative; // Punt de referència per als fills.
+    min-height: 100vh; // Almenys el 100% de l'alçada de la pantalla.
+    padding: v.$spacing-md; // 
+    background-color: v.$color-black; 
+    overflow: visible; // Si fora necessari, el contingut pot desbordar el container, especialment per a la imatge de fons.
+
+    // ----- Background Image Control -----
+    &__bg {
+      position: absolute; // La imatge de fons es posiciona de manera absoluta respecte al container.
+      // Amb aquest posicionament, la imatge es col·loca darrere del contingut gràcies al z-index.
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // La imatge cobreix tot el container sense deformar-se.
+      opacity: 0.7; // 70% d'opacitat. Fem el text més llegible. 
+    }
+
+    // ----- Fallback (No Grid) -----
+    display: block; // Fallback per a navegadors que no suporten grid. El contingut es mostrarà en bloc, un baix de l'altre.
+    
+    &__header,
+    &__schedule,
+    &__tickets {
+      position: relative;
+      z-index: 1; // S'assegurem que el contingut estigui per sobre de la imatge de fons (que té z-index: 0)
+    }
+
+    &__header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__title {
+      font-family: v.$font-display; // Playfair Display per al títol, com a element destacat.
+      color: v.$color-white;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); // 2px horizontal, 2px vertical, 10px de difuminat, color negre amb opacitat del 50%. Això crea un halo que millora la llegibilitat sobre la imatge de fons.
+      line-height: 0.9;
+    }
+
+    &__item {
+      margin-bottom: v.$spacing-md;
+      max-width: 500px;
+    }
+
+    // Estil de les targetes de ponents i horaris. Inspirat en les targetes del disseny de Jen Simmons, però adaptat a la nostra paleta de colors i tipografies.
+    
+    &__card {
+      background-color: rgba(117, 170, 219, 0.85); // #75AADB amb opacitat del 85% per a que es veja la imatge de fons una mica a través de les cartes.
+      border: none;
+      color: v.$color-white;
+      padding: v.$spacing-sm;
+      transition: transform 0.3s ease; // Transició suau per a l'efecte hover
+      
+      &:hover {
+        transform: scale(1.02);
+        background-color: v.$color-accent; // En fer hover, la targeta creix un 2% i el color d'accent es torna completament opac, fent que el text destaque més.
+      }
+    }
+
+    &__item-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    // ----- Caixa d'Inscripció -----
+    &__tickets {
+      background-color: v.$color-white;
+      padding: v.$spacing-sm v.$spacing-md;
+      max-width: 380px; 
+      border-radius: 4px;
+      margin-top: v.$spacing-md;
+    }
+    
+    &-title {
+      color: v.$color-black;
+      margin-bottom: 0.5rem;
+    }
+
+    &-desc {
+        color: v.$color-text-light;
+        margin-bottom: 1rem;
+      }
+
+    .poster__btn {
+      width: 100%; 
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+
+  // =====================================================
+  // GRID LAYOUT (Jen Simmons Style)
+  // =====================================================
+  @supports (display: grid) {
+    .poster {
+      display: grid;
+      // Grid de 8 columnas para mayor flexibilidad decorativa
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+      align-items: start;
+
+      &__header {
+        grid-column: 1 / 5;
+        grid-row: 1;
+        padding-top: 5vh;
+      }
+
+      &__tickets {
+        grid-column: 6 / 9;
+        grid-row: 3;
+        justify-self: end;
+        margin-top: 5vh;
+      }
+
+      &__schedule {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+
+      &__list {
+        display: grid;
+        // Creamos huecos (espacios vacíos) para ver la imagen de fondo
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 2rem;
+        padding: 0;
+      }
+
+      // Posicionamiento irregular para que se vea la imagen de fondo entre cajas
+      &__item {
+        max-width: 220px; // Cajas más pequeñas
+
+        &:nth-child(even) {
+          margin-top: 3rem; // Desplazamiento visual estilo Simmons
+        }
+        
+        &:nth-child(3n) {
+          grid-column: span 1;
+        }
+      }
+    }
+  }
+
+  // =====================================================
+  // CONTAINER QUERIES
+  // =====================================================
+  @container poster (min-width: 1000px) {
+    .poster__title {
+      font-size: 6rem;
+    }
+    
+    .poster__list {
+      grid-template-columns: repeat(4, 1fr);
+      // Dejamos columnas vacías intencionalmente
+      column-gap: 5vw; 
+    }
+  }
+}
