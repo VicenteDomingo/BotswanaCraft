@@ -1,3 +1,4 @@
+@use "../variables" as v;
 
 // =====================================================
 
@@ -25,29 +26,29 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
 // 2. HERO I SECCIONS
 // =====================================================
 
-@layer components {
+@layer components { // Capes de cascada. Tenim l'odre definit al main.scss: reset, bootstrap, components. Així, la capa de components té la màxima prioritat.
   .formulari {
+    min-height: 100svh; // "“small” viewport — the minimum guaranteed visible space." (https://medium.com/@tharunbalaji110/understanding-mobile-viewport-units-a-complete-guide-to-svh-lvh-and-dvh-0c905d96e21a). 100svh -> sempre mesura el viewport més menut possible (amb la barra visible) i ens garanteix que el contingut sempre cap. Nosaltres fem us de svh front a lvh o dvh, perquè ens garanteix que no hi ha overflow. 
     padding-top: 2rem;
     background: linear-gradient( 
       to bottom,
       v.$color-bg,
       color-mix(in srgb, v.$color-accent 5%, v.$color-bg)
     ); // En aquest gradient experimentem en la funció color-mix(): https://css-tricks.com/almanac/functions/c/color-mix/. "lets us mix two colors across a particular color space". in srgb -> espai de colors on es fa la barreja; v.$color-accent 5% -> 5% del color accent; v.$color-bg -> 95% de blanc. 
-    min-height: 100svh;
 
-    &__container {
-      container-type: inline-size;
+    &__container { // Container queries aplicat al <div class="formulari__container container py-5">
       container-name: formulari;
+      container-type: inline-size; // Declarem el context de conteniment 
     }
 
     &__hero {
-      padding-block: 4svh;
+      padding-block: 4svh; // Equival al 4% de l'alçada del viewport menut. Així, en pantalles menudes, el padding és menor. 
     }
 
     &__titol {
-      color: $color-blau-p3;
       font-family: v.$font-display;
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2rem, 5vw, 3.5rem); // La funció CSS clamp() "locks a value between a minimum and maximum, using a preferred value within that range." (https://css-tricks.com/almanac/functions/c/clamp/). min/pref/max. S'adapta a la finestra. En pantalles de 400px, 700px o 800px utilitza el preferit, és a dir, el 5% de l'amplada de la finestra. "The clamp() function is a responsive design superstar". Tipografia completament responsive sense media queries. 
+      color: $color-blau-p3; // Escollim un blau proper al de Botswana, però amb el nou espai de color display-p3. https://css-tricks.com/new-css-color-features-preview/
     }
 
     &__subtitol {
@@ -55,21 +56,21 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
     }
 
     &__section-titol {
-      color: v.$color-text;
       font-family: v.$font-display;
       font-weight: 700;
+      color: v.$color-text;
     }
   }
 }
 
 // =====================================================
-// 3. GALERIA D'IMATGES - CSS GRID AMB ANIMACIONS
+// 3. GALERIA D'IMATGES - Grid Responsiu
 // =====================================================
 
-@layer components {
+@layer components { // Podem tenir múltiples @layer capes components al mateix fitxer. Totes s'uneixen a la mateixa capa. 
   .formulari__grid-galeria {
     display: grid;
-    // Grid responsiu: 2 columnes en pantalla petita, 4 en gran
+    // Explorem el Grid responsiu (https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/). auto-fit -> crea tantes columnes com càpiguen; minmax(min(200px, 100%), 1fr): -> min(200px, 100%): cada columna té com a mínim 200px O el 100% si la pantalla és molt petita. Evita que les columnes siguin mai massa estretes. 1fr: màxim d'1 fracció de l'espai disponible. Així, esperem 2 columnes en pantalla menuda, 4 en gran.
     grid-template-columns: repeat(
       auto-fit,
       minmax(min(200px, 100%), 1fr)
@@ -77,61 +78,60 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
     gap: 1rem;
 
     @media (min-width: 600px) {
-      gap: 1.5rem;
+      gap: 1.5rem; // Augmentem la separació en pantalles a partir de 600px
     }
   }
 
-  .formulari__imatge-container {
-    position: relative;
-    overflow: hidden;
+  .formulari__imatge-container { // Contenidor per a cada imatge es posicione correctament
+    position: relative; // Ens cal per a que el fill
+    aspect-ratio: 1 / 1; // Totes les imatges tenen una proporció 1:1, és a dir, quadrades. 
+    overflow: hidden; // Necessari per a l'efecte zoom en hover. Creix la imatge però no desborda el contenidor. 
     border-radius: 0.75rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    aspect-ratio: 1 / 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Apliquem una ombra subtil
+    transition: transform 0.3s ease, box-shadow 0.3s ease; // Preparem l'animació de hover
 
     // Animació AOS - float up
-    &:hover {
-      transform: translateY(-8px) scale(1.02);
+    &:hover { // Animació del Contenidor
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      transform: translateY(-8px) scale(1.02); // 8px cap amunt i creix al voltant d'un 2%. Creem un efecte d'elevació visual. 
     }
   }
 
-  .formulari__imatge {
+  .formulari__imatge { // Cobrim el quadrat per mantenir proporcions. 
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease; // Prepara el zoom de la imatge en hover
   }
 
-  .formulari__imatge-container:hover .formulari__imatge {
+  .formulari__imatge-container:hover .formulari__imatge { // Animació de la imatge. Quan el contenidor té hover, fa zoom a la imatge. Apliquem un selector descendent -> .contenidor:hover .imatge
     transform: scale(1.1);
   }
 
-  // Overlay amb text - apareix al fer hover
-  .formulari__overlay {
+  .formulari__overlay { // Capa fosca amb text en fer hover
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
+    inset: 0; // L'equivalent a: top: 0; right: 0; bottom: 0; left: 0; La capa cobreix tot el contenidor. (" shorthand that corresponds to the top, right, bottom". https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/inset)
+    display: flex;
+    align-items: flex-end; // Text alineat baix de la imatge
+    justify-content: center; // Text centrat horitzontalment
+    padding: 1rem;
+    background: linear-gradient( 
       to top,
       hwb(0 0% 80% / 0.9),
       transparent
-    );
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    ); // Gradient de negre fosc (baix) a transparent (dalt). hwb(0 0% 80%) = negre (H=0, W=0%, B=80% = molt negre). / 0.9 = 90% d'opacitat (notació moderna de l'alpha). transparent = 0% d'opacitat (https://css-tricks.com/new-css-color-features-preview/)
+    opacity: 0; // Per defecte, serà invisible
+    transition: opacity 0.3s ease; // Apareix suaument en hover
   }
 
   .formulari__imatge-container:hover .formulari__overlay {
-    opacity: 1;
+    opacity: 1; // En fer hover, la capa apareix, passant d'opacitat 0 -> 1
   }
 
   .formulari__overlay-text {
-    color: v.$color-white;
-    font-weight: 600;
     font-size: 0.875rem;
+    font-weight: 600;
+    color: v.$color-white;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     // Unitat rem basada en la mida de l'arrel
@@ -144,52 +144,60 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
 
 @layer components {
   .formulari__dropdown {
+    position: relative; // Ho afegim per a que funcione el z-index al fill
+    z-index: 10;   
     // Ús de la unitat lv (large viewport) per a pantalles grans
-    @media (min-width: 1200px) {
-      margin-block: 3lv;
+    @media (min-width: 1200px) { // Afegim un marge vertical equivalent al 3% de l'altura total de la finestra, quan el navegador estiga expandit, és a dir, sense barra de ferramentes que molestes.
+      margin-block: 3lvh;
     }
   }
 
-  .formulari__dropdown-btn {
-    // BEM: element dins de bloc
-    border: 2px solid v.$color-accent;
-    color: v.$color-text;
+  .formulari__dropdown-btn { // ELEMENT BEM 
+    min-width: 280px;
     padding: 0.75rem 1.5rem;
+    margin-bottom: 1rem;
     font-weight: 500;
+    color: v.$color-text;
+    // BEM: element dins de bloc
+    background-color: v.$color-white; 
+    border: 2px solid v.$color-accent;
     border-radius: 0.5rem;
     transition: all 0.3s ease;
-    min-width: 280px;
+    
 
     &:hover {
-      background-color: v.$color-accent;
       color: v.$color-white;
+      background-color: v.$color-accent;
     }
 
-    &:focus {
-      box-shadow: 0 0 0 0.25rem color-mix(in srgb, v.$color-accent 50%, transparent);
+    &:focus { // Per a l'aureola o envoltori del boto. En mode focus, amb la función color-mix(), barregem el color accent amb transparent, sempre al voltant de tonalitats blau de la "marca"
+      box-shadow: 0 0 0 0.25rem 
+      color-mix(in srgb, v.$color-accent 50%, transparent);
     }
   }
 
   .formulari__dropdown-menu {
-    border: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
+    position: absolute; // En relació al pare. 
+    z-index: 1050; // Es superposa als inputs del formulari. 
     padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   }
 
   .formulari__dropdown-item {
     padding: 0.625rem 1rem;
     border-radius: 0.375rem;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease; // Per a que el canvi de color no siga brusc. Un esvaïment suau de 0.2 segons
 
     &:hover {
-      background-color: color-mix(in srgb, v.$color-accent 15%, white);
       color: v.$color-text;
+      background-color: color-mix(in srgb, v.$color-accent 15%, white);
     }
 
     &:active {
-      background-color: v.$color-accent;
       color: v.$color-white;
+      background-color: v.$color-accent;
     }
   }
 }
@@ -200,37 +208,37 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
 
 @layer components {
   .formulari__form {
-    max-width: 720px;
-    margin: 0 auto;
+    max-width: 720px; // Amplada del formulari
+    margin: 0 auto; // Centrem a la pàgina
   }
 
   .formulario__campo {
-    @media (min-width: 768px) {
+    @media (min-width: 768px) { // En pantalles +768px, en comptes del padding clàssic, ací, apliquem espai als costats. "shorthand property that combines the padding-inline-start and padding-inline-end properties into a single declaration, creating space around an element’s content in the inline (left and right) direction." (https://css-tricks.com/almanac/properties/p/padding/padding-inline/)
       padding-inline: 1rem;
     }
   }
 
-  .formulario__label {
-    font-weight: 600;
-    color: v.$color-text;
+  .formulari__label {
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
+    font-weight: 600;
+    color: v.$color-text;
   }
 
-  .formulario__input,
-  .formulario__textarea {
-    border: 2px solid #e0e0e0;
-    border-radius: 0.5rem;
+  .formulari__input,
+  .formulari__textarea {
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     background-color: v.$color-white;
+    border: 2px solid #e0e0e0;
+    border-radius: 0.5rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-    // Color de focus en format HWB
-    &:focus {
+    
+    &:focus { // Color de focus en format HWB. 
+      outline: none; // Outline per defecte l'eliminem. Fem us del box-shadow. 
       border-color: hwb(200 30% 40%);
-      box-shadow: 0 0 0 0.2rem hwb(200 30% 40% / 0.25);
-      outline: none;
+      box-shadow: 0 0 0 0.2rem hwb(200 30% 40% / 0.25); // Halo de focus semitransparent (25% d'opacitat). // 0.25 és la sintaxi moderna per a l'alpha en HWB.
     }
 
     &::placeholder {
@@ -238,46 +246,44 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
     }
   }
 
-  .formulario__textarea {
-    resize: vertical;
-    min-height: 120px;
+  .formulari__textarea {
+    min-height: 120px; // Tamany mínim de la caixa
+    resize: vertical; // permet estirar l'àrea d'escriure cap avall
   }
 
-  .formulario__accio {
+  .formulari__accio {
     margin-top: 2rem;
   }
 
-  .formulario__boto {
-    // Ús de unitat sv per a pantalles petites
+  .formulario__boto { 
     padding: 0.75rem 2rem;
-    font-weight: 600;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
-    background-color: v.$color-accent;
-    border-color: v.$color-accent;
     font-size: 1rem;
+    font-weight: 600;
 
     // Ús de display-p3 per al color
     background: $color-blau-p3;
+    background-color: v.$color-accent;
     border-color: $color-blau-p3;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
 
     &:hover {
       background: hwb(200 25% 35%);
       border-color: hwb(200 25% 35%);
-      transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(117, 170, 219, 0.4);
+      transform: translateY(-2px); // Xicotet efecte d'elevació
     }
 
     &:active {
-      transform: translateY(0);
+      transform: translateY(0); // En fer clic, el botó actúa com un moll, torna al seu estat original. 
     }
   }
 
   // Validació de formulari
   .formulario__input.is-invalid,
   .formulario__textarea.is-invalid {
-    border-color: #dc3545;
     background-image: none;
+    border-color: #dc3545;
   }
 
   .invalid-feedback {
@@ -291,8 +297,10 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
 // =====================================================
 
 @layer components {
-  .formulari__accordion {
-    --bs-accordion-border-color: hwb(0 80% 20%);
+  .formulari__accordion { // Personalitzem l'acordió Bootstrap amb Custom Properties (variables CSS). Bootstrap 5 exposa moltes variables CSS que podem sobreescriure directament sense recompilar Sass. https://getbootstrap.com/docs/5.0/customize/css-variables/; https://dev.to/lixeletto/4-dead-simple-ways-of-customizing-bootstrap-5132. A mode d'encapsulament, canviem les variales de l'acordió del nostre projecte. Anem en consonància a una millora de la "personalització de la marca"
+    --bs-accordion-border-color: hwb(0 80% 20%); // Per exemple, variable CSS de Bootstrap sobreescrita. La vora de l'acordió serà gris clar. El color per defecte seria : $accordion-border-color: rgba($black, .125);
+
+    // Sobreescrivim per millorar la usabilitat i jerarquia visual. 
     --bs-accordion-border-radius: 0.75rem;
     --bs-accordion-btn-padding-x: 1.25rem;
     --bs-accordion-btn-padding-y: 1rem;
@@ -300,45 +308,32 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
     --bs-accordion-body-padding-y: 1rem;
   }
 
-  .formulari__item {
-    border: 1px solid hwb(0 85% 15%);
-    border-radius: 0.75rem;
+  .formulari__item { // Cada ítem de l'acordió
     margin-bottom: 0.75rem;
     overflow: hidden;
     background-color: v.$color-white;
-
-    &:not(:first-of-type) {
-      border-top: 1px solid hwb(0 85% 15%);
-    }
+    border: 1px solid hwb(0 85% 15%);
+    border-radius: 0.75rem;
   }
 
   .formulari__item-header {
-    margin: 0;
+    margin: 0; 
   }
 
   .formulari__item-boto {
+    font-size: 1rem;
     font-weight: 600;
     color: v.$color-text;
     background-color: v.$color-white;
-    font-size: 1rem;
 
-    &:not(.collapsed) {
-      background-color: color-mix(in srgb, v.$color-accent 10%, v.$color-white);
+    &:not(.collapsed) { // Seleccionem el botó quan està obert. Bootstrap afegeix .collapsed quan el panell és tancat i l'elimina quan és obert. Permet estilitzar diferent l'estat obert/tancat.
       color: hwb(200 30% 40%);
+      background-color: color-mix(in srgb, v.$color-accent 10%, v.$color-white);
     }
 
     &:focus {
-      box-shadow: none;
       border-color: v.$color-accent;
-    }
-
-    // Icon plus/minus personalitzat
-    &::after {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3e%3c/svg%3e");
-      background-size: 1.25rem;
-      background-position: center;
-      width: 1.25rem;
-      height: 1.25rem;
+      box-shadow: none;
     }
   }
 
@@ -348,9 +343,9 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
   }
 
   .formulari__item-content {
-    color: v.$color-text-light;
     line-height: 1.6;
-    background-color: color-mix(in srgb, #FFFFFF 50%, white);
+    color: v.$color-text-light;
+    background-color: color-mix(in srgb, #FFF 50%, white);
   }
 }
 
@@ -360,16 +355,16 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
 
 @layer components {
   .formulari__modal {
-    --bs-modal-bg: v.$color-white;
+    --bs-modal-bg: #{v.$color-white};
     --bs-modal-border-radius: 1rem;
     --bs-modal-padding: 1.5rem;
   }
 
   .formulari__modal-content {
+    padding: 1rem;
     border: none;
     border-radius: 1rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    padding: 1rem;
   }
 
   .formulari__modal-header {
@@ -393,15 +388,15 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
   }
 
   .formulari__modal-icon {
+    margin-bottom: 1rem;
     // Ús de HWB per color
     color: hwb(140 40% 30%);
-    margin-bottom: 1rem;
   }
 
   .formulari__modal-body {
-    color: v.$color-text-light;
     font-size: 1rem;
     line-height: 1.6;
+    color: v.$color-text-light;
   }
 
   .formulari__modal-footer {
@@ -409,10 +404,10 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
   }
 
   .formulari__modal-boto {
-    background-color: v.$color-accent;
-    border-color: v.$color-accent;
     padding: 0.625rem 2rem;
     font-weight: 600;
+    background-color: v.$color-accent;
+    border-color: v.$color-accent;
     border-radius: 0.5rem;
 
     &:hover {
@@ -462,7 +457,7 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
   @media (min-width: 1200px) {
     .formulari {
       &__hero {
-        padding-block: 6lv;
+        padding-block: 6lvh;
       }
 
       &__grid-galeria {
@@ -473,6 +468,6 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
 
   // Unitat vp exemple: elements que depenen de l'ample de la finestra
   .formulari__titol {
-    letter-spacing: calc(0.02 * 1vp);
+    letter-spacing: calc(0.02 * 1vw);
   }
 }

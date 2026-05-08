@@ -3,47 +3,47 @@
 @layer components { // Fem ús de Cascadin layer. L'ordre està definit per l'ordre d'importació a main.scss. Els estils de .ponente sempre guanyent. 
 
   .ponentes { // Bloc BEM. Contenidor principal. 
-    container-type: inline-size; // Convertim el bloc a Container queries, igual que hem fet amb el poster. 
-    container-name: ponentes;
-    background-color: v.$color-bg;
     min-height: 80vh; // Almenys el 80% de l'alçada de la finestra. Si el contingut és més alt, el bloc s'adaptarà.
+    container-name: ponentes;
+    container-type: inline-size; // Convertim el bloc a Container queries, igual que hem fet amb el poster. 
+    background-color: v.$color-bg;
 
     &__header {
-      text-align: center;
       margin-bottom: v.$spacing-md; // 2rem = 32px. 
+      text-align: center;
     }
 
     &__grid { // Contenidor pare. Maquetat amb Flexbox.
       display: flex;
       flex-wrap: wrap; // Les targetes salten a la següent línia si no hi ha prou espai.
-      justify-content: center;
-      align-items: stretch; // Targetes amb la mateixa alçada, independentment del contingut.
       gap: 1.5rem;
-      padding: 0 2rem; // Espaiat horitzontal. 
+      align-items: stretch; // Targetes amb la mateixa alçada, independentment del contingut.
+      justify-content: center;
       max-width: 1100px; // Amplada màxima de la graella. 
+      padding: 0 2rem; // Espaiat horitzontal. 
       margin: 0 auto; // Centrat horitzontalment.
     }
   }
 
   .ponente { // Bloc BEM
     flex: 0 1 100%; // flex-grow -> la targeta no creix + enllà del tamany base; flex-shrink -> no s'encongeix si manca espai; flex-basis -> delimitem la mida. La mida ideal es el 100% de l'ample disponible
-    max-width: 100%; 
+    max-width: 100%;
+    overflow: hidden; // Assegura que les imatges no desborden els límits de la targeta. Respecta el border-radius. 
     background: v.$color-white;
     border-radius: 0.5rem;
-    overflow: hidden; // Assegura que les imatges no desborden els límits de la targeta. Respecta el border-radius.
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease; // Animació per a dues propietats.
 
     &:hover {
-      transform: translateY(-5px); // En hover, la targeta puja 5px (translació vertical negativa).
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); // Ombra més gran i més difusa en hover (8px de desplaçament vertical, 15px de difuminat, opacitat del 15%).
+      transform: translateY(-5px); // En hover, la targeta puja 5px (translació vertical negativa).
     }
 
     &__image {
       width: 100%;
       aspect-ratio: 4 / 3; // Per cada 4 unitats d'amplada, hi ha 3 d'altura. Totes les imatges tenen la mateixa proporció.
-      overflow: hidden; // Ocultem les parts de la imatge que sobreixen.
       margin: 0; // Eliminem el marge per defecte
+      overflow: hidden; // Ocultem les parts de la imatge que sobreixen.
 
       img {
         width: 100%;
@@ -63,9 +63,9 @@
     }
 
     &__name {
+      margin-bottom: 0.25rem;
       font-family: v.$font-display;
       color: v.$color-text;
-      margin-bottom: 0.25rem;
     }
 
     &__role {
@@ -73,8 +73,8 @@
     }
 
     &__desc {
-      line-height: 1.5;
       margin-bottom: v.$spacing-sm;
+      line-height: 1.5;
     }
 
     &__social {
@@ -84,8 +84,8 @@
       border-top: 1px solid rgba(0, 0, 0, 0.08);
 
       a {
-        color: v.$color-text-light;
         font-size: 1.25rem;
+        color: v.$color-text-light;
         transition: color 0.2s ease;
 
         &:hover {

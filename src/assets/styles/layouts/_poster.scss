@@ -4,14 +4,17 @@
   
   // Ens inspirem en el disseny de Jen Simmons https://labs.jensimmons.com/2017/03-008.html, descrit al següent tutorial: https://www.youtube.com/watch?v=-hmOZU7Zk10&list=PLbSquHt1VCf2irEuVf8c2hsoOMKyeQ2LO&index=1&t=329s
 
-  .poster { 
-    container-type: inline-size; // Convertim el poster en un container per a poder fer container queries. Amb inline-size controlem l'amplada del container, que és el que ens interessa per a adaptar el layout a diferents amplades de pantalla.
-    container-name: poster; // El nom del container.
+  .poster {
     position: relative; // Punt de referència per als fills.
+
+    // ----- Fallback (No Grid) -----
+    display: block; // Fallback per a navegadors que no suporten grid. El contingut es mostrarà en bloc, un baix de l'altre.
     min-height: 100vh; // Almenys el 100% de l'alçada de la pantalla.
-    padding: v.$spacing-md; // 
-    background-color: v.$color-black; 
+    padding: v.$spacing-md; 
+    container-name: poster; // El nom del container. 
+    container-type: inline-size; // Convertim el poster en un container per a poder fer container queries. Amb inline-size controlem l'amplada del container, que és el que ens interessa per a adaptar el layout a diferents amplades de pantalla. 
     overflow: visible; // Si fora necessari, el contingut pot desbordar el container, especialment per a la imatge de fons.
+    background-color: v.$color-black;
 
     // ----- Background Image Control -----
     &__bg {
@@ -25,9 +28,6 @@
       object-fit: cover; // La imatge cobreix tot el container sense deformar-se.
       opacity: 0.7; // 70% d'opacitat. Fem el text més llegible. 
     }
-
-    // ----- Fallback (No Grid) -----
-    display: block; // Fallback per a navegadors que no suporten grid. El contingut es mostrarà en bloc, un baix de l'altre.
     
     &__header,
     &__schedule,
@@ -38,37 +38,36 @@
 
     &__header {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1rem;
       flex-direction: column;
+      flex-wrap: wrap;
+      gap: 1rem;
       align-items: flex-start;
     }
 
     &__title {
       font-family: v.$font-display; // Playfair Display per al títol, com a element destacat.
+      line-height: 0.9;
       color: v.$color-white;
       text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); // 2px horizontal, 2px vertical, 10px de difuminat, color negre amb opacitat del 50%. Això crea un halo que millora la llegibilitat sobre la imatge de fons.
-      line-height: 0.9;
     }
 
     &__item {
-      margin-bottom: v.$spacing-md;
       max-width: 500px;
+      margin-bottom: v.$spacing-md;
     }
 
     // Estil de les targetes de ponents i horaris. Inspirat en les targetes del disseny de Jen Simmons, però adaptat a la nostra paleta de colors i tipografies.
     
     &__card {
+      padding: v.$spacing-sm;
+      color: v.$color-white;
       background-color: rgba(117, 170, 219, 0.85); // #75AADB amb opacitat del 85% per a que es veja la imatge de fons una mica a través de les cartes.
       border: none;
-      color: v.$color-white;
-      padding: v.$spacing-sm;
       transition: transform 0.3s ease; // Transició suau per a l'efecte hover
       
       &:hover {
-        transform: scale(1.02);
         background-color: v.$color-accent; // En fer hover, la targeta creix un 2% i el color d'accent es torna completament opac, fent que el text destaque més.
+        transform: scale(1.02);
       }
     }
 
@@ -80,21 +79,21 @@
 
     // ----- Caixa d'Inscripció -----
     &__tickets {
-      background-color: v.$color-white;
+      max-width: 380px;
       padding: v.$spacing-sm v.$spacing-md;
-      max-width: 380px; 
-      border-radius: 4px;
       margin-top: v.$spacing-md;
+      background-color: v.$color-white; 
+      border-radius: 4px;
     }
     
     &-title {
-      color: v.$color-black;
       margin-bottom: 0.5rem;
+      color: v.$color-black;
     }
 
     &-desc {
-        color: v.$color-text-light;
         margin-bottom: 1rem;
+        color: v.$color-text-light;
       }
 
     .poster__btn {
@@ -110,28 +109,28 @@
   @supports (display: grid) {
     .poster {
       display: grid;
+      grid-template-rows: auto;
       // Grid de 8 columnas para mayor flexibilidad decorativa
       grid-template-columns: repeat(8, 1fr);
-      grid-template-rows: auto;
       gap: 1rem;
       align-items: start;
 
       &__header {
-        grid-column: 1 / 5;
         grid-row: 1;
+        grid-column: 1 / 5;
         padding-top: 5vh;
       }
 
       &__tickets {
-        grid-column: 6 / 9;
         grid-row: 3;
+        grid-column: 6 / 9;
         justify-self: end;
         margin-top: 5vh;
       }
 
       &__schedule {
-        grid-column: 1 / -1;
         grid-row: 2;
+        grid-column: 1 / -1;
       }
 
       &__list {

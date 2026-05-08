@@ -24,9 +24,9 @@
 // 4. Add accessible line-height. Per defecte, l'interlineat del navegador es 1.2. Ací donem més espai entre línies
 // 5. Improve text rendering
 body {
+  padding-top: 70px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  padding-top: 70px;
 }
 
 // 6. Millora els media per defecte. Les imatges passen de inline a block. max-widt:100% -> disseny responsive, "This is done to keep large images from overflowing, if they're placed in a container that isn't wide enough to contain them."

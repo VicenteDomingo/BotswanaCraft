@@ -177,12 +177,12 @@
         <!-- g-4 -> gutters de 1.5rem; needs-validation -> activem la validació nadiva d'HTML; method="POST" -> mètode d'enviament de dades; name="contacte" -> per identificar el formulari per a Netlify; data-netlify="true" -> per habilitar el processament automàtic de formularis a Netlify; novalidate -> desactivem la validació automàtica del navegador per fer us de Bootstrap -->
 
           <div class="formulario__campo col-12 col-md-6">
-            <label for="input-nom" class="formulario__label form-label">
+            <label for="input-nom" class="formulari__label form-label">
               Nom complet <span class="text-danger">*</span>
             </label>
             <input
               type="text"
-              class="formulario__input form-control"
+              class="formulari__input form-control"
               id="input-nom"
               placeholder="Introdueix el teu nom"
               required
@@ -193,12 +193,12 @@
           </div>
 
           <div class="formulario__campo col-12 col-md-6">
-            <label for="input-email" class="formulario__label form-label">
+            <label for="input-email" class="formulari__label form-label">
               Correu electrònic <span class="text-danger">*</span>
             </label>
             <input
               type="email"
-              class="formulario__input form-control"
+              class="formulari__input form-control"
               id="input-email"
               placeholder="Introdueix el teu correu"
               required
@@ -209,34 +209,34 @@
           </div>
 
           <div class="formulario__campo col-12 col-md-4">
-            <label for="input-telefon" class="formulario__label form-label">
+            <label for="input-telefon" class="formulari__label form-label">
               Telèfon
             </label>
             <input
               type="tel"
-              class="formulario__input form-control"
+              class="formulari__input form-control"
               id="input-telefon"
               placeholder="Introdueix el teu telèfon"
             />
           </div>
 
           <div class="formulario__campo col-12 col-md-4">
-            <label for="input-ciutat" class="formulario__label form-label">
+            <label for="input-ciutat" class="formulari__label form-label">
               Ciutat
             </label>
             <input
               type="text"
-              class="formulario__input form-control"
+              class="formulari__input form-control"
               id="input-ciutat"
               placeholder="Introdueix la teva ciutat"
             />
           </div>
 
           <div class="formulario__campo col-12 col-md-4">
-            <label for="input-pais" class="formulario__label form-label">
+            <label for="input-pais" class="formulari__label form-label">
               País
             </label>
-            <select class="formulario__input form-select" id="input-pais">
+            <select class="formulari__input form-select" id="input-pais">
               <option selected>Selecciona el teu país</option>
               <option value="es">Botswana</option>
               <option value="and">Zàmbia</option>
@@ -247,12 +247,12 @@
           </div>
 
           <div class="formulario__campo col-12">
-            <label for="input-assumpte" class="formulario__label form-label">
+            <label for="input-assumpte" class="formulari__label form-label">
               Assumpte <span class="text-danger">*</span>
             </label>
             <input
               type="text"
-              class="formulario__input form-control"
+              class="formulari__input form-control"
               id="input-assumpte"
               placeholder="Introdueix l'assumpte del missatge"
               required
@@ -262,12 +262,12 @@
             </div>
           </div>
 
-          <div class="formulario__campo col-12">
-            <label for="input-missatge" class="formulario__label form-label">
+          <div class="formulari__campo col-12">
+            <label for="input-missatge" class="formulari__label form-label">
               Missatge <span class="text-danger">*</span>
             </label>
             <textarea
-              class="formulario__textarea form-control"
+              class="formulari__textarea form-control"
               id="input-missatge"
               rows="5"
               placeholder="Escriu el teu missatge aquí..."
@@ -278,7 +278,8 @@
             </div>
           </div>
 
-          <div class="formulario__accio col-12 text-center mt-4">
+          <!-- col-12 -> el botó ocupa les 12 columnes -->
+          <div class="formulari__accio col-12 text-center mt-4">
             <button type="submit" class="formulario__boto btn btn-primary text-white btn-lg px-5">
               Enviar missatge
             </button>

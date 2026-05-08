@@ -3,19 +3,21 @@
 @layer components { // Cascading Layers. Definim a main.scss: @layer reset, bootstrap, components -> components + prioritat que la resta. No cal que userm !important. 
 
   .article { // Bloc BEM. Representa el contenidor principal de tota la pàgina d'article. 
-    background-color: v.$color-bg;
-    min-height: 100vh; // La pàgina ocupa, almenys, el 100% de l'altura de la finestra. min-heigh -> en cas que el contingut siga més alt. 
-    width: 100%; // Tot l'ample disponible
     display: flex; // Flexbox per a la organizació
     flex-direction: column;
     align-items: center; // Els fills ocupen tot l'ample
+    width: 100%; // Tot l'ample disponible
+    min-height: 100vh; // La pàgina ocupa, almenys, el 100% de l'altura de la finestra. min-heigh -> en cas que el contingut siga més alt. 
+    container-name: article; // Nom del contenidor
+    container-type: inline-size; // Convertirm .article en contenido mesurable per amplada.
+    background-color: v.$color-bg;
   }
 
   .article__header { // Element BEM
-    max-width: 800px; // Limitem l'amplada per a millor llegibilitat ja que línies de text massa llargues cansen (45-70 caràcters x línia).
     width: 100%;
-    margin-inline: auto; // Centrat horitzontal
+    max-width: 800px; // Limitem l'amplada per a millor llegibilitat ja que línies de text massa llargues cansen (45-70 caràcters x línia).
     padding: 3rem 1rem;
+    margin-inline: auto; // Centrat horitzontal
     text-align: center;
   }
 
@@ -58,8 +60,8 @@
 
   // Contingut — alineat a l'esquerra
   .article__content { // Contenidor del text de l'article
-    max-width: 800px; // Mateixa amplada que article__header, per alineació visual
     width: 100%;
+    max-width: 800px; // Mateixa amplada que article__header, per alineació visual
     padding: 3rem 2rem;
     text-align: left;
   }
@@ -80,8 +82,8 @@
 
   // Blockquote
   .article__quote { // ELEMENT BEM
-    margin: 2.5rem 0;
     padding: 1.5rem;
+    margin: 2.5rem 0;
     font-style: italic;
     background: rgba(117, 170, 219, 0.15); // La regla color-function-notation:"legacy" de Stylelint, suporta la notació amb comes. https://stylelint.io/user-guide/rules/color-function-notation/
     border-left: 4px solid v.$color-accent;
@@ -96,8 +98,8 @@
 
   // Llista
   .article__list {
-    margin: 2rem 0 2.5rem;
     padding-left: 1.5rem;
+    margin: 2rem 0 2.5rem;
     line-height: 2;
     text-align: left;
   }
@@ -160,10 +162,10 @@
   .article__content h3,
   .article__content h4
 ) { // Agrupa selectors CSS per evitar la repetició del codi. Seguim el principi que menciona Harris a la seua guia: DRY (Don't Repeat Yourself), "keep the repetition of key information to a minimum" (https://cssguidelin.es/#dry). En cas que fèrem ús de h3, h4 en un futur, ja tindríem els estils. 
-  font-family: v.$font-display;
-  color: v.$color-text;
   margin-top: 3.5rem;
   margin-bottom: 1.5rem;
+  font-family: v.$font-display;
+  color: v.$color-text;
 }
 
 
@@ -183,17 +185,13 @@
   // ===================================================
   // Container query 
   // ===================================================
-  .article {
-    container-type: inline-size; // Convertirm .article en contenido mesurable per amplada.
-    container-name: article; // Nom del contenidor
-  }
 
   @container article (max-width: 600px) { // En pantalles menudes, 
     .article__title {
       font-size: 1.8rem; // Reduïm el títol
     }
 
-    .article__image--full { // 
+    .article__image--full { 
       height: 200px; // Es modifica l'alçada de la imatge
     }
 
