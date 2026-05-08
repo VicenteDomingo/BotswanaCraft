@@ -15,7 +15,7 @@
   "targets": {
     "web": {
       "context": "browser",
-      "publicUrl": "./",
+      "publicUrl": "/",
       "source": [
       "src/index.html",
       "src/ponentes.html",
