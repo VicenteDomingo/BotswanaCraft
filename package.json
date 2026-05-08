@@ -16,7 +16,13 @@
     "web": {
       "context": "browser",
       "publicUrl": "./",
-      "source": "src/index.html",
+      "source": [
+      "src/index.html",
+      "src/ponentes.html",
+      "src/article.html",
+      "src/formulari.html",
+      "src/success.html"
+    ],
       "engines": {
         "browsers": "last 2 versions, > 0.5%, not dead"
       }
