@@ -177,7 +177,7 @@
         >
         <!-- g-4 -> gutters de 1.5rem; needs-validation -> activem la validació nadiva d'HTML; method="POST" -> mètode d'enviament de dades; name="contacte" -> per identificar el formulari per a Netlify; data-netlify="true" -> per habilitar el processament automàtic de formularis a Netlify; novalidate -> desactivem la validació automàtica del navegador per fer us de Bootstrap -->
 
-          <div class="formulario__campo col-12 col-md-6">
+          <div class="formulari__camp col-12 col-md-6">
             <label for="input-nom" class="formulari__label form-label">
               Nom complet <span class="text-danger">*</span>
             </label>
@@ -194,7 +194,7 @@
             </div>
           </div>
 
-          <div class="formulario__campo col-12 col-md-6">
+          <div class="formulari__camp col-12 col-md-6">
             <label for="input-email" class="formulari__label form-label">
               Correu electrònic <span class="text-danger">*</span>
             </label>
@@ -211,7 +211,7 @@
             </div>
           </div>
 
-          <div class="formulario__campo col-12 col-md-4">
+          <div class="formulari__camp col-12 col-md-4">
             <label for="input-telefon" class="formulari__label form-label">
               Telèfon
             </label>
@@ -224,7 +224,7 @@
             />
           </div>
 
-          <div class="formulario__campo col-12 col-md-4">
+          <div class="formulari__camp col-12 col-md-4">
             <label for="input-ciutat" class="formulari__label form-label">
               Ciutat
             </label>
@@ -237,7 +237,7 @@
             />
           </div>
 
-          <div class="formulario__campo col-12 col-md-4">
+          <div class="formulari__camp col-12 col-md-4">
             <label for="input-pais" class="formulari__label form-label">
               País
             </label>
@@ -251,7 +251,7 @@
             </select>
           </div>
 
-          <div class="formulario__campo col-12">
+          <div class="formulari__camp col-12">
             <label for="input-assumpte" class="formulari__label form-label">
               Assumpte <span class="text-danger">*</span>
             </label>
@@ -268,7 +268,7 @@
             </div>
           </div>
 
-          <div class="formulari__campo col-12">
+          <div class="formulari__camp col-12">
             <label for="input-missatge" class="formulari__label form-label">
               Missatge <span class="text-danger">*</span>
             </label>
@@ -475,5 +475,18 @@
       src="../node_modules/aos/dist/aos.js"
     ></script>
     <script type="module" src="./assets/scripts/main.js"></script>
+    <script>
+  // Validació Bootstrap
+  const forms = document.querySelectorAll('.needs-validation');
+  forms.forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    });
+  });
+</script>
   </body>
 </html>

@@ -1,9 +1,6 @@
 // _bootstrap-config.scss
-// Aquí definim les variables ABANS d'importar Bootstrap
-// Bootstrap llegeix aquestes variables i les usa
-// Importem Bootstrap DESPRÉS de les variables
+// Definim les variables ABANS d'importar Bootstrap. Bootstrap llegeix aquestes variables i les usa. Importem Bootstrap DESPRÉS de les variables
 
-// 1. PRIMERO definimos las variables
 // Colors
 $primary: #75AADB;
 $secondary: #000;
@@ -32,5 +29,4 @@ $btn-border-radius: 0.375rem;
 $btn-padding-y: 0.75rem;
 $btn-padding-x: 1.5rem;
 
-// 2. Y AL FINAL DE TODO, importamos Bootstrap UNA SOLA VEZ
 @import "bootstrap/scss/bootstrap";

@@ -212,7 +212,7 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
     margin: 0 auto; // Centrem a la pàgina
   }
 
-  .formulario__campo {
+  .formulari__camp {
     @media (min-width: 768px) { // En pantalles +768px, en comptes del padding clàssic, ací, apliquem espai als costats. "shorthand property that combines the padding-inline-start and padding-inline-end properties into a single declaration, creating space around an element’s content in the inline (left and right) direction." (https://css-tricks.com/almanac/properties/p/padding/padding-inline/)
       padding-inline: 1rem;
     }
