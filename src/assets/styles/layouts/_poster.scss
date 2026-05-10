@@ -1,11 +1,11 @@
 @use "../variables" as v; // Importem les variables per a colors, fonts i espaiat
 
-@layer components { // Fem ús de Cascadin layer. L'ordre està definit per l'ordre d'importació a main.scss. 
+@layer components { // Fem ús de Cascade layer. L'ordre està definit per l'ordre d'importació a main.scss. 
   
   // Ens inspirem en el disseny de Jen Simmons https://labs.jensimmons.com/2017/03-008.html, descrit al següent tutorial: https://www.youtube.com/watch?v=-hmOZU7Zk10&list=PLbSquHt1VCf2irEuVf8c2hsoOMKyeQ2LO&index=1&t=329s
 
   .poster {
-    position: relative; // Punt de referència per als fills.
+    position: relative; // Punt de referència per als fills. Per exemple, la imatge de fons. 
 
     // ----- Fallback (No Grid) -----
     display: block; // Fallback per a navegadors que no suporten grid. El contingut es mostrarà en bloc, un baix de l'altre.
@@ -16,7 +16,7 @@
     overflow: visible; // Si fora necessari, el contingut pot desbordar el container, especialment per a la imatge de fons.
     background-color: v.$color-black;
 
-    // ----- Background Image Control -----
+    // Estils per la imatge de fons
     &__bg {
       position: absolute; // La imatge de fons es posiciona de manera absoluta respecte al container.
       // Amb aquest posicionament, la imatge es col·loca darrere del contingut gràcies al z-index.
@@ -77,7 +77,7 @@
       letter-spacing: 1px;
     }
 
-    // ----- Caixa d'Inscripció -----
+    // Estils pe a la caixa d'inscripció
     &__tickets {
       max-width: 380px;
       padding: v.$spacing-sm v.$spacing-md;
@@ -104,13 +104,12 @@
   }
 
   // =====================================================
-  // GRID LAYOUT (Jen Simmons Style)
+  // GRID LAYOUT ( Ens inspirem  en l'estil de Jen Simmons )
   // =====================================================
-  @supports (display: grid) {
+  @supports (display: grid) { // Comprovem si el navegador suporta display:grid. Ens inspirem en Jens Simmons i Chen Hui Jing
     .poster {
       display: grid;
-      grid-template-rows: auto;
-      // Grid de 8 columnas para mayor flexibilidad decorativa
+      grid-template-rows: auto; // Les file s'ajusten automàticament a l'altura del contingut. 
       grid-template-columns: repeat(8, 1fr);
       gap: 1rem;
       align-items: start;
@@ -135,39 +134,34 @@
 
       &__list {
         display: grid;
-        // Creamos huecos (espacios vacíos) para ver la imagen de fondo
+        // Decidim crear espais buits per veure la imatge de fons
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 2rem;
         padding: 0;
       }
 
-      // Posicionamiento irregular para que se vea la imagen de fondo entre cajas
+      // Posicionament irregular per veure la imatge de fons entre les caixes 
       &__item {
-        max-width: 220px; // Cajas más pequeñas
+        max-width: 220px; // Caixes més menudes
 
         &:nth-child(even) {
-          margin-top: 3rem; // Desplazamiento visual estilo Simmons
-        }
-        
-        &:nth-child(3n) {
-          grid-column: span 1;
+          margin-top: 3rem; // Desplaçament visual inspirant-se en Simmons
         }
       }
     }
   }
 
   // =====================================================
-  // CONTAINER QUERIES
+  // Container Queries per al poster
   // =====================================================
-  @container poster (min-width: 1000px) {
+  @container poster (min-width: 1000px) { // mentre que @media (min-width: 1000px) → mesura l'amplada de la finestra, amb @container poster (min-width: 1000px) → mesurem l'amplada del CONTENIDOR. Abans ja hem declarat .poster com a context de conteniment. Així, quan poster fa 1000px o més, 
     .poster__title {
-      font-size: 6rem;
+      font-size: 6rem; // Títol més gran (96px)
     }
     
     .poster__list {
-      grid-template-columns: repeat(4, 1fr);
-      // Dejamos columnas vacías intencionalmente
-      column-gap: 5vw; 
+      grid-template-columns: repeat(4, 1fr); // En pantalles grans, 4 columnes iguals. Sobreescrivim el repeat(auto-fit, minmax(180px, 1fr)), més flexible, però menys controlat. 
+      column-gap: 5vw; // Espai entre columnes 5% de l'amplada de la finestra. 
     }
   }
 }

@@ -26,8 +26,8 @@
   }
 
   .ponente { // Bloc BEM
-    flex: 0 1 100%; // flex-grow -> la targeta no creix + enllà del tamany base; flex-shrink -> no s'encongeix si manca espai; flex-basis -> delimitem la mida. La mida ideal es el 100% de l'ample disponible
-    max-width: 100%;
+    flex: 0 0 100%; // Propietat shorthand amb 3 valors: flex-grow 0 -> la targeta no creix + enllà del tamany base; flex-shrink 0 -> no s'encongeix si manca espai; flex-basis 100% -> delimitem la mida. La mida ideal es el 100% de l'ample disponible. En mòbil, cada targeta ocupa tota la fila: 1 targeta per fila.
+    max-width: 100%; // Reforcem que la targeta mai supere el 100%
     overflow: hidden; // Assegura que les imatges no desborden els límits de la targeta. Respecta el border-radius. 
     background: v.$color-white;
     border-radius: 0.5rem;
@@ -95,41 +95,18 @@
     }
   }
 
-  // Container Queries
-  @container ponentes (min-width: 600px) {
-    .ponente {
-      flex: 0 0 280px;
-      max-width: 280px;
+  // Container Queries. .ponentes és el context de conteniment, el contenidor pare. Les targetes estan dins de .ponentes__grid, més estret que pel padding de Bootstrap
+  @container ponentes (min-width: 500px) {
+  .ponente { // Quan .ponentes té 500px o més d'ample. En aquest cas .ponentes = finestra, aleshroes hi haurà 2 targetes d'uns 190px amb un gap d'1rem
+    flex: 0 0 calc(50% - 1rem); // flex-basis -> "sets the initial main size of a flex item" (https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-basis). 50%: la meitat de l'ample de .ponentes__grid - 1rem -> restem la meitat del gap entre targetes
+    max-width: calc(50% - 1rem); // Igual que el valor de flex-basis. La targeta mai supera aquest ample. 
+  }
+}
+
+  @container ponentes (min-width: 900px) {
+    .ponente { // S'activa quan la finestra fa 900px o més. 
+      flex: 0 0 calc(33.333% - 1rem); // flex-basis 33.33 -> 13 de l'ample del contenidor, és a dir, 3 targetes. Sempre 3 columnes
+      max-width: calc(33.333% - 1rem);
     }
   }
-
-  @container ponentes (min-width: 768px) {
-    .ponente {
-      flex: 0 0 320px;
-      max-width: 320px;
-    }
-  }
-
-  @container ponentes (min-width: 992px) {
-    .ponente {
-      flex: 0 0 300px;
-      max-width: 300px;
-    }
-  }
-
-  // Responsive
-  // @media (max-width: 575px) {
-  //   .ponente {
-  //     flex: 0 0 100%;
-  //     max-width: 100%;
-  //   }
-  // }
-
-  // @media (min-width: 576px) and (max-width: 767px) {
-  //   .ponente {
-  //     flex: 0 0 calc(50% - 1rem);
-  //     max-width: calc(50% - 1rem);
-  //   }
-  // }
-
 }

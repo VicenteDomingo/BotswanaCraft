@@ -30,12 +30,8 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
   .formulari {
     min-height: 100svh; // "“small” viewport — the minimum guaranteed visible space." (https://medium.com/@tharunbalaji110/understanding-mobile-viewport-units-a-complete-guide-to-svh-lvh-and-dvh-0c905d96e21a). 100svh -> sempre mesura el viewport més menut possible (amb la barra visible) i ens garanteix que el contingut sempre cap. Nosaltres fem us de svh front a lvh o dvh, perquè ens garanteix que no hi ha overflow. 
     padding-top: 2rem;
-    background: linear-gradient( 
-      to bottom,
-      v.$color-bg,
-      color-mix(in srgb, v.$color-accent 5%, v.$color-bg)
-    ); // En aquest gradient experimentem en la funció color-mix(): https://css-tricks.com/almanac/functions/c/color-mix/. "lets us mix two colors across a particular color space". in srgb -> espai de colors on es fa la barreja; v.$color-accent 5% -> 5% del color accent; v.$color-bg -> 95% de blanc. 
-
+    background: $color-crema-p3;
+  
     &__container { // Container queries aplicat al <div class="formulari__container container py-5">
       container-name: formulari;
       container-type: inline-size; // Declarem el context de conteniment 
@@ -146,7 +142,7 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
   .formulari__dropdown {
     position: relative; // Ho afegim per a que funcione el z-index al fill
     z-index: 10;   
-    // Ús de la unitat lv (large viewport) per a pantalles grans
+    // Ús de la unitat lvh (large viewport) per a pantalles grans
     @media (min-width: 1200px) { // Afegim un marge vertical equivalent al 3% de l'altura total de la finestra, quan el navegador estiga expandit, és a dir, sense barra de ferramentes que molestes.
       margin-block: 3lvh;
     }
@@ -159,7 +155,7 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
     font-weight: 500;
     color: v.$color-text;
     // BEM: element dins de bloc
-    background-color: v.$color-white; 
+    background-color: $color-taronja-hwb; 
     border: 2px solid v.$color-accent;
     border-radius: 0.5rem;
     transition: all 0.3s ease;
@@ -167,7 +163,7 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
 
     &:hover {
       color: v.$color-white;
-      background-color: v.$color-accent;
+      background-color: $color-verd-hwb;
     }
 
     &:focus { // Per a l'aureola o envoltori del boto. En mode focus, amb la función color-mix(), barregem el color accent amb transparent, sempre al voltant de tonalitats blau de la "marca"
@@ -346,74 +342,6 @@ $color-crema-p3: color(display-p3 1 0.98 0.94);
     line-height: 1.6;
     color: v.$color-text-light;
     background-color: color-mix(in srgb, #FFF 50%, white);
-  }
-}
-
-// =====================================================
-// 7. MODAL - AGRAÏMENT
-// =====================================================
-
-@layer components {
-  .formulari__modal {
-    --bs-modal-bg: #{v.$color-white};
-    --bs-modal-border-radius: 1rem;
-    --bs-modal-padding: 1.5rem;
-  }
-
-  .formulari__modal-content {
-    padding: 1rem;
-    border: none;
-    border-radius: 1rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  }
-
-  .formulari__modal-header {
-    padding-bottom: 0;
-  }
-
-  .formulari__modal-titol {
-    font-family: v.$font-display;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: v.$color-text;
-  }
-
-  .formulari__modal-tancar {
-    opacity: 0.5;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  .formulari__modal-icon {
-    margin-bottom: 1rem;
-    // Ús de HWB per color
-    color: hwb(140 40% 30%);
-  }
-
-  .formulari__modal-body {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: v.$color-text-light;
-  }
-
-  .formulari__modal-footer {
-    padding-top: 0;
-  }
-
-  .formulari__modal-boto {
-    padding: 0.625rem 2rem;
-    font-weight: 600;
-    background-color: v.$color-accent;
-    border-color: v.$color-accent;
-    border-radius: 0.5rem;
-
-    &:hover {
-      background-color: hwb(200 25% 35%);
-      border-color: hwb(200 25% 35%);
-    }
   }
 }
 
